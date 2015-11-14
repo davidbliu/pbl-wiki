@@ -29,9 +29,6 @@ class WikiEditorHooks {
 			'modules' => array(
 				'ext.wikiEditor.toolbar',
 			),
-			'stylemodules' => array(
-				'ext.wikiEditor.toolbar.styles',
-			),
 		),
 		'dialogs' => array(
 			'preferences' => array(
@@ -155,25 +152,16 @@ class WikiEditorHooks {
 	 *
 	 * Adds the modules to the edit form
 	 *
-	 * @param $editPage EditPage the current EditPage object.
-	 * @param $output OutputPage object.
+	 * @param $toolbar array list of toolbar items
 	 * @return bool
 	 */
-	public static function editPageShowEditFormInitial( $editPage, $outputPage ) {
-		if ( $editPage->contentModel !== CONTENT_MODEL_WIKITEXT ) {
-			return true;
-		}
+	public static function editPageShowEditFormInitial( &$toolbar ) {
+		global $wgOut;
 
 		// Add modules for enabled features
 		foreach ( self::$features as $name => $feature ) {
-			if ( !self::isEnabled( $name ) ) {
-				continue;
-			}
-			if ( isset( $feature['stylemodules'] ) ) {
-				$outputPage->addModuleStyles( $feature['stylemodules'] );
-			}
-			if ( isset( $feature['modules'] ) ) {
-				$outputPage->addModules( $feature['modules'] );
+			if ( isset( $feature['modules'] ) && self::isEnabled( $name ) ) {
+				$wgOut->addModules( $feature['modules'] );
 			}
 		}
 		return true;
@@ -191,7 +179,8 @@ class WikiEditorHooks {
 		if ( self::isEnabled( 'toolbar' ) ) {
 			$toolbar = Html::rawElement(
 				'div', array(
-					'class' => 'wikiEditor-oldToolbar'
+					'class' => 'wikiEditor-oldToolbar',
+					'style' => 'display:none;'
 				),
 				$toolbar
 			);

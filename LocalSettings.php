@@ -37,7 +37,8 @@ $wgStylePath = "$wgScriptPath/skins";
 
 ## The relative URL path to the logo.  Make sure you change this from the default,
 ## or else you'll overwrite your logo when you upgrade!
-$wgLogo = "$wdScriptPath/pbl-logo-circle-138.png";
+$wgLogo = "$wdScriptPath/logo-135.png";
+$wgFavicon = "$wdScriptPath/logo-135.png";
 
 ## UPO means: this is also a user preference option
 
@@ -134,11 +135,11 @@ require_once "$IP/skins/Vector/Vector.php";
 
 ## TinyMCE_MW.php: Easily implement Moxiecode's TinyMCE into MediaWiki ##
 require_once("$IP/extensions/TinyMCE_MW/TinyMCE_MW.php"); 	//Extension php file location
-$wgUseTinymce = true; 						//Init needed for clicking on a new article link
-$wgDefaultUserOptions ['showtoolbar'] = 0;  			//Disable the standard wiki edit toolbar without editing your DefaultSettings.php file
-$wgTinymceTheme = "msword";                			//Options are "simple", "advanced", "msword"
-$wgMyWikiURL = "$wgServer/$wgScriptPath/";			//Configuration setting for link URLs
-$wgExt_valid_elements = "data[table|template],repeat[table|sort],categorytree[mode|depth],inputbox[type|bgcolor|width|default|preload|editintro|buttonlabel|searchbuttonlabel|break],big";							//Global variable for valid MediaWiki Elements to be passed to the TinyMCE_MW.php file
+//$wgUseTinymce = true; 						//Init needed for clicking on a new article link
+//$wgDefaultUserOptions ['showtoolbar'] = 0;  			//Disable the standard wiki edit toolbar without editing your DefaultSettings.php file
+//$wgTinymceTheme = "msword";                			//Options are "simple", "advanced", "msword"
+//$wgMyWikiURL = "$wgServer/$wgScriptPath/";			//Configuration setting for link URLs
+//$wgExt_valid_elements = "data[table|template],repeat[table|sort],categorytree[mode|depth],inputbox[type|bgcolor|width|default|preload|editintro|buttonlabel|searchbuttonlabel|break],big";							//Global variable for valid MediaWiki Elements to be passed to the TinyMCE_MW.php file
 ## End TinyMCE Configuration ##
 # Disable reading by anonymous users
 $wgGroupPermissions['*']['read'] = false;
@@ -157,3 +158,29 @@ $wgGroupPermissions['*']['createaccount'] = false;
 #embedding videos
 require_once "$IP/extensions/EmbedVideo/EmbedVideo.php";
 $wdEnableAPI = true;
+
+# access control
+require_once("extensions/AccessControl/AccessControl.php");
+
+# namespace custom stuff
+# https://www.mediawiki.org/wiki/Manual:Using_custom_namespaces
+define("USER_NS", 3000);
+$wgExtraNamespaces[USER_NS] = "Usernamespace";
+#
+# httpLets
+require_once "$IP/extensions/HTMLets/HTMLets.php";
+$wgHTMLetsDirectory = "$IP/htmlets";
+$wgRawHtml = true;
+
+# google docs 
+require_once "$IP/extensions/GoogleDocTag/GoogleDocTag.php";
+
+require_once "$IP/extensions/VisualEditor/VisualEditor.php";
+
+// Enable by default for everybody
+$wgDefaultUserOptions['visualeditor-enable'] = 1;
+
+// Don't allow users to disable it
+$wgHiddenPrefs[] = 'visualeditor-enable';
+
+

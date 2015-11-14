@@ -4,13 +4,8 @@
 
 .wikiEditor-ui-toolbar {
 	position: relative;
-	display: block;
+	width: 100%;
 }
-
-.wikiEditor-ui-toolbar .empty {
-	display: none;
-}
-
 /* Expandable Sections */
 .wikiEditor-ui-toolbar .sections {
 	float: left;
@@ -19,16 +14,12 @@
 	height: 0;
 }
 .wikiEditor-ui-toolbar .sections .section {
+	display: none;
 	float: left;
 	width: 100%;
 	border-top: 1px solid #DDDDDD;
 	background-color: #E0EEf7;
 }
-
-.wikiEditor-ui-toolbar .sections .section-hidden {
-	display: none;
-}
-
 .wikiEditor-ui-toolbar {
 	/* @embed */
 	background-image: url(images/toolbar/base.png);
@@ -56,8 +47,7 @@
 .wikiEditor-ui-toolbar .section-main {
 	position: relative;
 	float: left;
-	min-height: 26px;
-	height: 100%;
+	height: 26px;
 }
 /* Groups */
 .wikiEditor-ui-toolbar .group {
@@ -78,14 +68,8 @@
 }
 /* Sprited Buttons */
 .wikiEditor-toolbar-spritedButton { 
-	background-image: url('images/toolbar/button-sprite.png');
 	/* @embed */
-	background-image: -webkit-linear-gradient(transparent, transparent), url('images/toolbar/button-sprite.svg');
-	/* @embed */
-	background-image: linear-gradient(transparent, transparent), url('images/toolbar/button-sprite.svg');
-
-	background-position: 0 0;
-	background-repeat: no-repeat;
+	background: url(images/toolbar/button-sprite.png) 0 0 no-repeat;
 	display: block;
 	float: left;
 	height: 22px;
